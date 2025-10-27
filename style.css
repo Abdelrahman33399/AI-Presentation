@@ -1,0 +1,443 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg-dark: #0f0f0f;
+  --bg-darker: #121212;
+  --text-light: #ffffff;
+  --text-gray: #e0e0e0;
+  --neon-green: #00ffaa;
+  --neon-orange: #ff6f00;
+  --card-bg: rgba(30, 30, 30, 0.7);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* === Header Responsive - بدون إخفاء الأزرار === */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(15, 15, 15, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, var(--neon-green), var(--neon-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+nav a {
+  color: var(--text-gray);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  transition: all 0.2s;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+}
+
+nav a:hover {
+  color: var(--neon-green);
+  background: rgba(0, 255, 170, 0.1);
+}
+
+/* زر الهامبرجر - يظهر فقط على الشاشات الصغيرة */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.hamburger:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.hamburger span {
+  width: 20px;
+  height: 2px;
+  background: var(--text-light);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* على الجوال: القائمة تظهر عموديًا عند فتح الهامبرجر */
+nav.mobile-open ul {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  background: rgba(15, 15, 15, 0.95);
+  padding: 1.5rem;
+  margin-top: 10px;
+  border-radius: 12px;
+  width: 100%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* إظهار الهامبرجر فقط على الشاشات الصغيرة */
+@media (max-width: 600px) {
+  .hamburger {
+    display: flex;
+  }
+
+  nav ul {
+    display: none;
+  }
+
+  nav.mobile-open ul {
+    display: flex;
+  }
+}
+
+/* Main Content */
+main {
+  margin-top: 80px;
+  padding: 2rem 5%;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(45deg, var(--neon-green), var(--neon-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: var(--text-gray);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.zoom-image {
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.zoom-image img {
+  width: 100%;
+  max-width: 600px;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.zoom-image:hover img {
+  transform: scale(1.05);
+}
+
+/* Cards Grid */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+.card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+  color: var(--neon-green);
+}
+
+/* Hover Effect for Cards */
+.card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 10px 25px rgba(0, 255, 170, 0.3);
+  border-color: rgba(0, 255, 170, 0.4);
+}
+
+/* Transition Groups */
+.card.zoom.show { transform: scale(1); }
+.card.zoom { transform: scale(0.9); }
+
+.card.fade { opacity: 0; }
+.card.fade.show { opacity: 1; }
+
+.card.slide { transform: translateX(-30px); }
+.card.slide.show { transform: translateX(0); }
+
+.card.flip { transform: rotateY(90deg); }
+.card.flip.show { transform: rotateY(0); }
+
+.card.rotate { transform: rotate(-10deg) scale(0.9); }
+.card.rotate.show { transform: rotate(0) scale(1); }
+
+/* Quiz Banners */
+.quiz-banner {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.quiz-banner h2 {
+  color: var(--neon-orange);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.question p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--neon-green);
+}
+
+.answer-label {
+  display: block;
+  margin: 0.6rem 0;
+  padding: 1rem;
+  background: rgba(40, 40, 40, 0.7);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.answer-label:hover {
+  background: rgba(0, 255, 170, 0.1);
+}
+
+.answer-label input {
+  display: none;
+}
+
+.correct {
+  border-color: var(--neon-green) !important;
+  background: rgba(0, 255, 170, 0.1) !important;
+}
+
+.incorrect {
+  border-color: #ff4d4d !important;
+  background: rgba(255, 77, 77, 0.1) !important;
+}
+
+.feedback {
+  margin-top: 0.5rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  display: none;
+}
+
+.feedback.correct-feedback {
+  background: rgba(0, 255, 170, 0.15);
+  color: var(--neon-green);
+  display: block;
+}
+
+.feedback.incorrect-feedback {
+  background: rgba(255, 77, 77, 0.15);
+  color: #ff6666;
+  display: block;
+}
+
+.result-btn {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 12px 30px;
+  background: linear-gradient(45deg, var(--neon-green), var(--neon-orange));
+  color: #000;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.result-btn:hover {
+  transform: scale(1.05);
+}
+
+.result-display {
+  text-align: center;
+  padding: 2rem;
+  margin-top: 2rem;
+  background: var(--card-bg);
+  border-radius: 16px;
+  display: none;
+}
+
+.result-display.show {
+  display: block;
+  animation: fadeIn 0.6s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.score {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  background: linear-gradient(45deg, var(--neon-green), var(--neon-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Team & Standards */
+.banner {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.banner h2 {
+  color: var(--neon-green);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.members, .supervision ul, .standards ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  list-style: none;
+}
+
+.members div {
+  text-align: center;
+}
+
+.members img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+  border: 2px solid var(--neon-green);
+}
+
+/* Portfolio Button */
+.portfolio-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(45deg, var(--neon-green), var(--neon-orange));
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 15px rgba(0, 255, 170, 0.5);
+  z-index: 999;
+  font-family: 'Cairo', sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.portfolio-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 105, 0, 0.7);
+}
+
+/* Footer spacing */
+footer {
+  height: 60px;
+}
+
+/* Responsive Grid */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+
+  main {
+    padding: 2rem 2%;
+  }
+}
