@@ -1,278 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>الأسئلة التفاعلية</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    /* تنسيقات CSS أساسية للوضوح والتفاعل */
-    .answer-label {
-      cursor: pointer;
-      display: block;
-      padding: 10px;
-      margin-bottom: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-    .answer-label:hover {
-        background-color: #eee;
-    }
-    .answer-label.correct {
-      background-color: #d4edda; /* أخضر فاتح */
-      border-color: #c3e6cb;
-      color: #155724;
-    }
-    .answer-label.incorrect {
-      background-color: #f8d7da; /* أحمر فاتح */
-      border-color: #f5c6cb;
-      color: #721c24;
-    }
-    .answer-label input[type="radio"] {
-      margin-left: 10px;
-    }
-    .feedback {
-      padding: 10px;
-      border-radius: 5px;
-      margin-top: 10px;
-      font-weight: bold;
-      display: none; /* إخفاء التغذية الراجعة مبدئيًا */
-    }
-    .correct-feedback {
-      background-color: #d4edda;
-      color: #155724;
-    }
-    .incorrect-feedback {
-      background-color: #f8d7da;
-      color: #721c24;
-    }
-    .result-display {
-      margin-top: 30px;
-      padding: 20px;
-      border: 2px solid var(--neon-green, #00ff00);
-      border-radius: 10px;
-      text-align: center;
-      display: none; /* إخفاء النتيجة مبدئيًا */
-      background-color: #f9f9f9;
-    }
-    .result-display.show {
-        display: block;
-    }
-    .score {
-      font-size: 2em;
-      font-weight: bold;
-      color: var(--neon-green, #00ff00);
-    }
-    .result-btn {
-        display: block;
-        margin: 20px auto;
-        padding: 10px 20px;
-        font-size: 1.1em;
-        cursor: pointer;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-    }
-  </style>
-</head>
-<body>
-  <canvas id="bg-canvas"></canvas>
-
-  <header>
-    <div class="logo">AI-Presentation</div>
-    <nav>
-      <ul id="nav-menu">
-        <li><a href="index.html">الرئيسية</a></li>
-        <li><a href="slides.html">العروض</a></li>
-        <li><a href="quizzes.html">الأسئلة</a></li>
-        <li><a href="team.html">الفريق</a></li>
-        <li><a href="standards.html">المعايير</a></li>
-      </ul>
-    </nav>
-    <div class="hamburger" id="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </header>
-
-  <main>
-    <h2 style="text-align:center; margin:2rem 0; color:var(--neon-green, #00ff00)">اختبر معلوماتك</h2>
-
-    <div class="quiz-banner multiple-choice">
-      <div class="question" data-correct="c">
-        <p>ما عاصمة فرنسا؟</p>
-        <label class="answer-label">
-          <input type="radio" name="q1" value="a">
-          لندن
-        </label>
-        <label class="answer-label">
-          <input type="radio" name="q1" value="b">
-          مدريد
-        </label>
-        <label class="answer-label">
-          <input type="radio" name="q1" value="c">
-          باريس
-        </label>
-        <label class="answer-label">
-          <input type="radio" name="q1" value="d">
-          روما
-        </label>
-        <div class="feedback correct-feedback">✔️ صحيح! باريس هي عاصمة فرنسا وأكبر مدنها من حيث عدد السكان، وتشتهر ببرج إيفل.</div>
-        <div class="feedback incorrect-feedback">❌ خطأ! العاصمة الصحيحة هي باريس. لندن عاصمة بريطانيا، مدريد عاصمة إسبانيا، وروما عاصمة إيطاليا.</div>
-      </div>
-    </div>
-
-    <div class="quiz-banner true-false">
-      <div class="question" data-correct="true">
-        <p>الأرض مسطحة.</p>
-        <label class="answer-label">
-          <input type="radio" name="q2" value="false">
-          خطأ
-        </label>
-        <label class="answer-label">
-          <input type="radio" name="q2" value="true">
-          صح
-        </label>
-        <div class="feedback correct-feedback">✔️ صحيح! العبارة خاطئة، لأن الأرض في الحقيقة كروية الشكل (أو بيضاوية قليلاً).</div>
-        <div class="feedback incorrect-feedback">❌ خطأ! العبارة غير صحيحة. الإجابة الصحيحة هي **خطأ** لأن الأرض كروية وليست مسطحة.</div>
-      </div>
-    </div>
-    
-    <div class="quiz-banner multiple-choice">
-        <div class="question" data-correct="b">
-            <p>ما هو الجزء المسؤول عن التنفس في النباتات؟</p>
-            <label class="answer-label">
-                <input type="radio" name="q3" value="a">
-                الجذور
-            </label>
-            <label class="answer-label">
-                <input type="radio" name="q3" value="b">
-                الأوراق
-            </label>
-            <label class="answer-label">
-                <input type="radio" name="q3" value="c">
-                الساق
-            </label>
-            <div class="feedback correct-feedback">✔️ إجابة موفقة! تتم عملية تبادل الغازات (التنفس والنتح) بشكل رئيسي عبر **الثغور** الموجودة في الأوراق.</div>
-            <div class="feedback incorrect-feedback">❌ خطأ! الجزء المسؤول عن التنفس وتبادل الغازات هو الأوراق. الجذور لامتصاص الماء، والساق للدعم والنقل.</div>
-        </div>
-    </div>
-
-    <button class="result-btn" id="showResult">عرض نتيجتي</button>
-
-    <div class="result-display" id="resultDisplay">
-      <h3>نتيجتك النهائية</h3>
-      <div class="score" id="score">0/3</div>
-      <p id="evaluation">قم بالإجابة على الأسئلة أولاً!</p>
-    </div>
-  </main>
-
-  <footer></footer>
-
-  <script src="main.js"></script> <script>
-    // عدد الأسئلة الكلي لتحديد النسبة
-    const totalQuestions = document.querySelectorAll('.question').length;
-
-    // ## نظام التصحيح التفاعلي الفوري
-    document.querySelectorAll('.question').forEach((question, index) => {
-      const inputs = question.querySelectorAll('input[type="radio"]');
-      // قيمة الإجابة الصحيحة المخزنة في data-correct
-      const correctAnswer = question.dataset.correct;
-      // البحث عن عناصر التغذية الراجعة
-      const feedbackCorrect = question.querySelector('.correct-feedback');
-      const feedbackIncorrect = question.querySelector('.incorrect-feedback');
-
-      inputs.forEach(input => {
-        // الاستماع لحدث التغيير (اختيار الإجابة)
-        input.addEventListener('change', () => {
-          // 1. إزالة أي حالات تلوين سابقة من جميع الخيارات
-          question.querySelectorAll('.answer-label').forEach(label => {
-            label.classList.remove('correct', 'incorrect');
-          });
-
-          const selectedValue = input.value;
-          const isCorrect = selectedValue === correctAnswer;
-
-          // 2. تلوين الإجابة المختارة وإظهار حالة الإجابة الصحيحة فقط (لزيادة التفاعل)
-          if (isCorrect) {
-              // إذا كانت صحيحة، لون الإجابة بالأخضر
-              input.parentElement.classList.add('correct');
-              // أظهر التغذية الراجعة الصحيحة
-              feedbackCorrect.style.display = 'block';
-              feedbackIncorrect.style.display = 'none';
-
-          } else {
-              // إذا كانت خاطئة، لون الإجابة بالأحمر
-              input.parentElement.classList.add('incorrect');
-              // أظهر التغذية الراجعة الخاطئة
-              feedbackCorrect.style.display = 'none';
-              feedbackIncorrect.style.display = 'block';
-
-              // (اختياري) يمكنك تلوين الإجابة الصحيحة بالأخضر لإظهارها للطالب بعد اختياره الخاطئ
-              question.querySelectorAll(`input[value="${correctAnswer}"]`).forEach(correctInput => {
-                  correctInput.parentElement.classList.add('correct');
-              });
-          }
-        });
-      });
-    });
-
-    // ## عرض النتيجة النهائية
-    document.getElementById('showResult').addEventListener('click', () => {
-      let correctCount = 0;
-      // التأكد من أن الطالب أجاب على جميع الأسئلة
-      let allAnswered = true;
-      
-      document.querySelectorAll('.question').forEach(question => {
-        const correctAnswer = question.dataset.correct;
-        // البحث عن الزر المحدد في هذا السؤال
-        const selected = question.querySelector('input[type="radio"]:checked');
-        
-        // التحقق من الإجابة
-        if (selected) {
-          if (selected.value === correctAnswer) {
-            correctCount++;
-          }
-        } else {
-            // لم تتم الإجابة على كل الأسئلة
-            allAnswered = false;
-        }
-      });
-      
-      const scoreEl = document.getElementById('score');
-      const evaluationEl = document.getElementById('evaluation');
-      const resultDisplay = document.getElementById('resultDisplay');
-      
-      if (!allAnswered) {
-          // رسالة في حالة عدم الإجابة على كل الأسئلة
-          scoreEl.textContent = `0/${totalQuestions}`;
-          evaluationEl.textContent = 'من فضلك، أجب على جميع الأسئلة أولاً! 🤔';
-          resultDisplay.classList.add('show');
-          return; 
-      }
-
-      // تحديث النتيجة
-      scoreEl.textContent = `${correctCount}/${totalQuestions}`;
-
-      // التقييم بناءً على النسبة المئوية
-      let evaluation = '';
-      const percentage = (correctCount / totalQuestions) * 100;
-      
-      if (percentage === 100) evaluation = 'ممتاز! 🥳 لقد حصلت على الدرجة الكاملة! 💯';
-      else if (percentage >= 80) evaluation = 'جيد جداً! 👍 عمل رائع، قاب قوسين أو أدنى من العلامة الكاملة.';
-      else if (percentage >= 50) evaluation = 'لابأس، يمكنك التحسن! 🙂 راجع الأجزاء التي أخطأت فيها وحاول مرة أخرى.';
-      else evaluation = 'يجب أن تراجع المعلومات! 📚 نتيجتك منخفضة، تحتاج إلى المزيد من التركيز والمراجعة.';
-
-      evaluationEl.textContent = evaluation;
-      // إظهار مربع النتيجة
-      resultDisplay.classList.add('show');
-      
-      // (اختياري) تمرير الشاشة لعرض النتيجة
-      resultDisplay.scrollIntoView({ behavior: 'smooth' });
-    });
-  </script>
-</body>
-</html>
