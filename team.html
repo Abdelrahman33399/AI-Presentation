@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>الفريق</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .team-photo {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .team-photo img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      border: 3px solid var(--neon-green);
+    }
+    .team-info {
+      text-align: center;
+      padding: 1.5rem;
+    }
+    .team-info h2 {
+      color: var(--neon-green);
+    }
+    .team-info p {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+    }
+    .supervision-list {
+      list-style: none;
+      padding: 0;
+      text-align: center;
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+    }
+    .supervision-list li {
+      margin: 0.8rem 0;
+      color: var(--neon-orange);
+      font-weight: bold;
+    }
+  .team-names {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    text-align: right;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    columns: 2;
+    column-gap: 2rem;
+  }
+  @media (max-width: 768px) {
+    .team-names { columns: 1; }
+  }
+  .team-names li {
+    break-inside: avoid;
+    position: relative;
+    padding-right: 1.2rem;
+  }
+  .team-names li::before {
+    content: "•";
+    color: var(--neon-green);
+    position: absolute;
+    right: 0;
+    font-weight: bold;
+  }
+
+  </style>
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <header>
+    <div class="logo">Presentation</div>
+    <nav>
+      <ul id="nav-menu">
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="slides.html">العروض</a></li>
+        <li><a href="quizzes.html">الأسئلة</a></li>
+        <li><a href="team.html">الفريق</a></li>
+        <li><a href="standards.html">المعايير</a></li>
+      </ul>
+    </nav>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <main>
+    <section class="banner team">
+      <div class="team-photo">
+        <img 
+  src="image/team.jpg" alt="صورة فريق العمل"
+>
+      </div>
+
+      <div class="team-info">
+        <h2>فريق العمل</h2>
+        <p>فريق متكامل مكوّن من 10 أعضاء، كل منهم أعد وحدة تخصصية في مجال التقنيات المساعدة، تحت إشراف أكاديمي دقيق. أسماء الفريق:</p>
+<ul class="team-names">
+  <li>عبدالرحمن إبراهيم ربيع الشافعي</li>
+  <li>عمر محمد السيد سيد أحمد هلال</li>
+  <li>علي منتصر مخيمر فرحات</li>
+  <li>فاطمة فايز حسين حسن دويدار</li>
+  <li>فيروز محمود محمد محمد</li>
+  <li>ڤيولا عماد تقي</li>
+  <li>كارين أشرف منير</li>
+  <li>ماريا عادل يوسف</li>
+  <li>أروى علي أحمد علي الراوي</li>
+  <li>ريهام هاني السيد</li>
+</ul>
+        <ul class="supervision-list">
+          <li>د. أمل شعبان </li>
+          <li>م. سمية سلامة </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer></footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

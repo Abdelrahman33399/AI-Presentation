@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>المعايير</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .standards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    @media (max-width: 600px) {
+      .standards-grid { grid-template-columns: 1fr; }
+    }
+    .standard-category {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 1.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .standard-category h3 {
+      color: var(--neon-orange);
+      margin-bottom: 1.2rem;
+      font-size: 1.4rem;
+    }
+    .standard-category ul {
+      list-style: none;
+      padding: 0;
+    }
+    .standard-category li {
+      padding: 0.6rem 0 0.6rem 1.8rem;
+      position: relative;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .standard-category li:last-child {
+      border-bottom: none;
+    }
+    .standard-category li::before {
+      content: "✓";
+      color: var(--neon-green);
+      font-weight: bold;
+      position: absolute;
+      right: 0;
+      top: 0.6rem;
+    }
+    [data-theme="light"] .standard-category li::before {
+      color: #0d9662;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <header>
+    <div class="logo">Presentation</div>
+    <nav>
+      <ul id="nav-menu">
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="slides.html">العروض</a></li>
+        <li><a href="quizzes.html">الأسئلة</a></li>
+        <li><a href="team.html">الفريق</a></li>
+        <li><a href="standards.html">المعايير</a></li>
+      </ul>
+    </nav>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <main>
+    <section class="banner standards">
+      <h2>معايير بناء الموقع (Front-End & UX)</h2>
+      <div class="standards-grid">
+        <div class="standard-category">
+          <h3>التصميم والتوافق</h3>
+          <ul>
+            <li>تصميم متجاوب بالكامل (Responsive Design) — يعمل على الجوال، التابلت، والديسكتوب</li>
+            <li>مبدأ <strong>Mobile-First</strong> — تطوير بدءًا من الشاشات الصغيرة</li>
+            <li>دعم كامل لاتجاه <strong>RTL</strong> (اللغة العربية من اليمين لليسار)</li>
+            <li>متوافق مع المتصفحات الرئيسية (Chrome, Firefox, Edge, Safari)</li>
+          </ul>
+        </div>
+
+        <div class="standard-category">
+          <h3>إمكانية الوصول (Accessibility)</h3>
+          <ul>
+            <li>متوافق مع معايير <strong>WCAG 2.1</strong> (AA Level)</li>
+            <li>دعم كامل لقارئات الشاشة (Screen Readers) عبر <strong>semantic HTML + ARIA</strong></li>
+            <li>تباين ألوان عالي بين النص والخلفية (≥ 4.5:1)</li>
+            <li>وضع مظلم/فاتح قابل للتخصيص وحفظه عبر <code>localStorage</code></li>
+          </ul>
+        </div>
+
+        <div class="standard-category">
+          <h3>الأداء والتجربة</h3>
+          <ul>
+            <li>سرعة تحميل عالية (<strong>Lighthouse Performance ≥ 90</strong>)</li>
+            <li>تحميل كسول (Lazy Loading) للصور والفيديوهات</li>
+            <li>تحسين حجم الصور (WebP + q=80)</li>
+            <li>تأثيرات أنيميشن سلسة بدون تأثير على الأداء</li>
+          </ul>
+        </div>
+
+        <div class="standard-category">
+          <h3>التقنيات المستخدمة</h3>
+          <ul>
+            <li>HTML5 + CSS3 (Grid, Flexbox, Custom Properties)</li>
+            <li>Vanilla JavaScript (بدون مكتبات خارجية — لتقليل الحجم)</li>
+            <li>Canvas API للخلفيات التفاعلية</li>
+            <li>Intersection Observer لـ Scroll-based Animations</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="banner standards">
+      <h2>معايير العرض التقديمي (Presentation & EdTech Design)</h2>
+      <div class="standards-grid">
+        <div class="standard-category">
+          <h3>التخطيط التعليمي</h3>
+          <ul>
+            <li>هيكلة المحتوى وفق نموذج <strong>Gagne’s Nine Events of Instruction</strong></li>
+            <li>دمج أسئلة تفاعلية بعد كل وحدة لتثبيت التعلّم</li>
+            <li>تخصيص المحتوى حسب أنماط التعلّم (بصري، سمعي، حركي)</li>
+            <li>دعم <strong>Universal Design for Learning (UDL)</strong></li>
+          </ul>
+        </div>
+
+        <div class="standard-category">
+          <h3>التصميم البصري (Presentation Design)</h3>
+          <ul>
+            <li>الالتزام بمبدأ <strong>6×6</strong> (لا أكثر من 6 أسطر، 6 كلمات/سطر)</li>
+            <li>استخدام خطوط واضحة (Cairo Arabic) بحجم ≥ 24pt للعناوين</li>
+            <li>ألوان متناسقة مع هوية بصرية ثابتة (Neon Green + Orange)</li>
+            <li>صور ذات جودة عالية، مع وصف نصي بديل (Alt Text)</li>
+          </ul>
+        </div>
+
+        <div class="standard-category">
+          <h3>التفاعل والدمج</h3>
+          <ul>
+            <li>كروت تفاعلية مع تأثيرات Hover (Zoom, Glow, Lift)</li>
+            <li>أسئلة اختيار من متعدد مع تغذية راجعة فورية + شرح</li>
+            <li>دعم إعادة الاختبار وتقييم الأداء</li>
+            <li>ربط المحتوى بالتطبيقات الواقعية (مثل: Seeing AI, Proloquo2Go)</li>
+          </ul>
+        </div>
+
+        <div class="standard-category">
+          <h3>الجودة والاحترافية</h3>
+          <ul>
+            <li>مراجعة لغوية دقيقة (بدون أخطاء إملائية أو نحوية)</li>
+            <li>توثيق علمي للمصادر (عند الحاجة)</li>
+            <li>استخدام لغة واضحة، بسيطة، ودقيقة — مناسبة لطلاب الجامعات</li>
+            <li>صور واقعية/كرتونية مُصممة خصيصًا لتعكس الهوية الثقافية</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer></footer>
+
+  <a href="https://abdelrahman33399.github.io/portfolio--/" class="portfolio-btn">Abdelrahman Ebrahem</a>
+
+  <script src="main.js"></script>
+</body>
+</html>
