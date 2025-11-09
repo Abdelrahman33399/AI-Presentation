@@ -71,11 +71,18 @@ header {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
-[data-theme="light"] .logo,
-[data-theme="light"] nav a {
-  -webkit-text-fill-color: #1a1a1a;
-  color: #1a1a1a;
+/* نص الهيدر أبيض دائمًا (حتى في الوضع الفاتح) */
+[data-theme="light"] header .logo,
+[data-theme="light"] header nav a {
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+[data-theme="light"] header {
+  background: rgba(30, 41, 59, 0.85); /* slate-800 شبه شفاف */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 nav ul {
@@ -399,45 +406,43 @@ main {
   padding: 0;
   text-align: center;
   font-size: 1.2rem;
-}
-/* زر التبديل — أعلى اليمين */
+}/* زر التبديل — تحت الهيدر مباشرة (مش داخله) */
 .theme-toggle {
   position: fixed;
-  top: 16px;
-  right: 16px;
-  width: 40px;
-  height: 40px;
+  top: 72px; /* 80px (height of header) - 8px padding = ~72px */
+  right: 20px;
+  width: 42px;
+  height: 42px;
   border-radius: 12px;
-  background: rgba(30, 30, 30, 0.6);
+  background: rgba(30, 30, 30, 0.75);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: none;
   color: var(--text-light);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1001; /* فوق الهيدر */
+  z-index: 999; /* تحت الهيدر (اللي z-index=1000) */
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="light"] .theme-toggle {
-  background: rgba(255, 255, 255, 0.7);
-  color: #475569;
+  background: rgba(255, 255, 255, 0.8);
+  color: #4a5568;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .theme-toggle:hover {
-  transform: scale(1.1);
-  background: rgba(0, 255, 170, 0.2);
+  transform: scale(1.12);
+  background: rgba(0, 255, 170, 0.25);
 }
 
 [data-theme="light"] .theme-toggle:hover {
-  background: rgba(16, 185, 129, 0.15); /* emerald-500 خفيف */
+  background: rgba(13, 150, 98, 0.18);
 }
-
 /* Portfolio Button */
 .portfolio-btn {
   position: fixed;
